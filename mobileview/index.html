@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>TruthSayer AI · Mobile</title>
+<meta name="description" content="TruthSayer AI mobile app preview">
+<meta name="theme-color" content="#000000">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="TruthSayer">
+<link rel="manifest" href="/mobileview/manifest.webmanifest">
+<link rel="icon" href="/mobileview/icon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#000;--ink:#F5F5F7;--ink-2:rgba(245,245,247,.68);--ink-3:rgba(245,245,247,.44);--line:rgba(255,255,255,.12);--line-2:rgba(255,255,255,.2);
+  --grad:linear-gradient(96deg,#0C56FF 0%,#1E7BF5 42%,#3CFDB5 100%);--sans:'Manrope','Segoe UI',system-ui,-apple-system,Helvetica,Arial,sans-serif;color-scheme:dark}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased;overflow:hidden}
+a{color:inherit;text-decoration:none}
+
+/* desktop preview: copy on the left, phone on the right */
+.preview{min-height:100%;display:grid;grid-template-columns:minmax(0,440px) auto;gap:72px;align-items:center;justify-content:center;padding:24px 40px;position:relative;isolation:isolate}
+.preview::before,.preview::after{content:"";position:absolute;z-index:-1;border-radius:50%;filter:blur(110px);pointer-events:none}
+.preview::before{width:640px;height:520px;left:8%;top:-180px;background:radial-gradient(circle,rgba(12,86,255,.35),transparent 65%)}
+.preview::after{width:560px;height:480px;right:6%;bottom:-200px;background:radial-gradient(circle,rgba(126,72,255,.28),transparent 65%)}
+.copy .eyebrow{font-size:13px;font-weight:700;color:var(--ink-3);letter-spacing:.14em;text-transform:uppercase}
+.copy h1{font-size:clamp(40px,4.6vw,64px);line-height:.98;letter-spacing:-.055em;font-weight:800;margin:14px 0 0}
+.copy h1 span{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.copy p{color:var(--ink-2);font-size:15.5px;line-height:1.55;margin:18px 0 0;max-width:44ch}
+.btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+.btn{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:700;padding:12px 20px;border-radius:999px;transition:transform .25s cubic-bezier(.16,1,.3,1)}
+.btn:hover{transform:translateY(-2px)}
+.btn--grad{background:var(--grad);color:#fff;box-shadow:0 10px 30px rgba(12,86,255,.35)}
+.btn--ghost{box-shadow:inset 0 0 0 1px var(--line-2)}
+.jump{margin-top:34px;display:flex;flex-wrap:wrap;gap:8px}
+.jump span{width:100%;font-size:12px;font-weight:700;color:var(--ink-3);letter-spacing:.08em;text-transform:uppercase;margin-bottom:2px}
+.jump button{font:inherit;font-size:12.5px;font-weight:700;color:var(--ink-2);background:none;border:1px solid var(--line);border-radius:999px;padding:7px 13px;cursor:pointer}
+.jump button:hover{color:var(--ink);border-color:var(--line-2)}
+
+.phone-wrap{width:414px;height:var(--ph,892px);display:grid;place-items:start center}
+.phone{width:414px;height:892px;padding:12px;border-radius:64px;background:linear-gradient(145deg,#2a2a31,#0d0d11 40%,#1d1d23);box-shadow:0 0 0 1.5px #3a3a42,0 40px 120px rgba(0,0,0,.7),inset 0 0 0 1px rgba(255,255,255,.06);transform-origin:top center;transform:scale(var(--s,1))}
+.screen{position:relative;width:390px;height:868px;border-radius:52px;overflow:hidden;display:flex;flex-direction:column;background:var(--app-bg,#000)}
+.status{height:50px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:6px 34px 0 44px;font-size:15px;font-weight:700;color:var(--app-ink,#fff);background:var(--app-bg,#000)}
+.status .ind{display:flex;gap:6px;align-items:center}
+.island{position:absolute;top:11px;left:50%;transform:translateX(-50%);width:122px;height:35px;border-radius:20px;background:#000;z-index:2}
+iframe{flex:1;width:100%;border:0;display:block;background:var(--app-bg,#000)}
+.home-ind{height:30px;flex:none;display:grid;place-items:center;background:var(--app-bg,#000)}
+.home-ind i{width:134px;height:5px;border-radius:3px;background:var(--app-ink,#fff);opacity:.85}
+
+@media (max-width:1000px){.preview{grid-template-columns:auto}.copy{display:none}}
+
+/* real phones: the app fills the screen, no frame */
+@media (max-width:600px){
+  body{background:var(--app-bg,#000);padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px)}
+  .preview{display:block;padding:0;height:100%;min-height:0}
+  .preview::before,.preview::after,.copy,.status,.island,.home-ind{display:none}
+  .phone-wrap,.phone,.screen{width:100%;height:100%;padding:0;border-radius:0;box-shadow:none;background:none;transform:none}
+}
+</style>
+</head>
+<body>
+<div class="preview">
+  <div class="copy">
+    <span class="eyebrow">TruthSayer AI · Mobile</span>
+    <h1>The whole app,<br><span>in your pocket.</span></h1>
+    <p>This is the phone version of the TruthSayer dashboard. Tap through it in the frame, or open this page on your phone and add it to your home screen to use it like an app.</p>
+    <div class="btns">
+      <a class="btn btn--grad" href="/mobileview/app.html" target="_blank" rel="noopener" id="fullBtn">Open full screen</a>
+      <a class="btn btn--ghost" href="/">Desktop view</a>
+    </div>
+    <div class="jump"><span>Jump to</span>
+      <button data-go="home">Home</button><button data-go="alerts">Alerts</button><button data-go="strategies">Strategies</button><button data-go="ticker-ZS">ZS ticker</button><button data-go="rewards">Rewards</button><button data-go="chat">AI Chat</button><button data-go="welcome">Onboarding</button>
+    </div>
+  </div>
+  <div class="phone-wrap">
+    <div class="phone">
+      <div class="screen">
+        <div class="island"></div>
+        <div class="status"><span>9:41</span><span class="ind">
+          <svg width="18" height="12" viewBox="0 0 18 12" fill="currentColor" aria-hidden="true"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5.5" width="3" height="6.5" rx="1"/><rect x="10" y="3" width="3" height="9" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg>
+          <svg width="16" height="12" viewBox="0 0 16 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M1.5 4.2a9.5 9.5 0 0 1 13 0M4 7a6 6 0 0 1 8 0"/><circle cx="8" cy="10" r="1.2" fill="currentColor" stroke="none"/></svg>
+          <svg width="27" height="13" viewBox="0 0 27 13" fill="none" aria-hidden="true"><rect x=".5" y=".5" width="23" height="12" rx="3.5" stroke="currentColor" opacity=".4"/><rect x="2.5" y="2.5" width="19" height="8" rx="2" fill="currentColor"/><path d="M25 4.5v4a2 2 0 0 0 0-4z" fill="currentColor" opacity=".4"/></svg>
+        </span></div>
+        <iframe id="app" title="TruthSayer AI mobile app"></iframe>
+        <div class="home-ind"><i></i></div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+const frame = document.getElementById('app');
+const root = document.documentElement;
+frame.src = '/mobileview/app.html' + location.hash;
+
+// keep this page's URL hash in step with the app, so /mobileview#alerts deep-links and survives reloads
+frame.addEventListener('load', () => {
+  const w = frame.contentWindow;
+  const sync = () => {
+    history.replaceState(null, '', location.pathname + w.location.hash);
+    document.getElementById('fullBtn').href = '/mobileview/app.html' + w.location.hash;
+  };
+  w.addEventListener('hashchange', sync);
+  sync();
+});
+document.querySelectorAll('[data-go]').forEach(b => b.onclick = () => { frame.contentWindow.location.hash = b.dataset.go; });
+
+// match the fake status bar and home indicator to the app's light/dark theme
+setInterval(() => {
+  try {
+    const cs = getComputedStyle(frame.contentDocument.body);
+    root.style.setProperty('--app-bg', cs.backgroundColor);
+    root.style.setProperty('--app-ink', cs.color);
+  } catch (e) {}
+}, 400);
+
+// scale the phone down to fit shorter screens
+function fit() {
+  const s = Math.min(1, (innerHeight - 48) / 892);
+  root.style.setProperty('--s', s);
+  root.style.setProperty('--ph', 892 * s + 'px');
+}
+addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

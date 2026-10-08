@@ -1,0 +1,14 @@
+{
+  "name": "TruthSayer AI",
+  "short_name": "TruthSayer",
+  "description": "AI trading alerts, strategies and rewards.",
+  "start_url": "/mobileview/",
+  "scope": "/mobileview/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "icons": [
+    { "src": "/mobileview/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}

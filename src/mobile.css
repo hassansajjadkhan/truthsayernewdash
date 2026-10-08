@@ -1,0 +1,58 @@
+/* Mobile app shell (/mobileview/app.html). Loaded after styles.css; everything is scoped to html.m
+   so the desktop page is unaffected. The responsive rules in styles.css already handle the narrow layout. */
+.m{-webkit-tap-highlight-color:transparent}
+.m body{overscroll-behavior-y:none}
+.m .app{grid-template-columns:minmax(0,1fr)}
+.m .launch{display:none!important}
+.m .main{padding:0 16px calc(96px + env(safe-area-inset-bottom,0px))}
+.m .main::before{width:360px;height:320px;left:-160px;top:-160px}
+.m .main::after{width:300px;height:280px;right:-140px;top:-100px}
+
+/* app header: logo · page title · actions */
+.m .topbar{gap:10px;padding:10px 0}
+.m .m-logo{width:36px;height:36px;border-radius:12px;display:grid;place-items:center;background:var(--grad);color:#fff;flex:none}
+.m .m-title{font-size:17px;font-weight:800;letter-spacing:-.02em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.m .tb-r{gap:6px}
+.m .icon-btn{width:38px;height:38px}
+.m .streak{height:38px;padding:0 12px 0 7px}
+.m .streak .lbl{display:none}
+
+/* bottom tab bar */
+.m .tabbar{display:flex;padding-top:10px}
+.m .tabbar [aria-current="page"]{color:var(--ink)}
+.m .tabbar a:active,.m .tabbar button:active{transform:scale(.92)}
+
+/* type & spacing tuned for a phone */
+.m .page-head{margin:6px 0 20px}
+.m .h1{font-size:30px}
+.m .display,.m .hi .display{font-size:36px}
+.m .lead{font-size:14.5px}
+.m .card{border-radius:22px}
+.m .pad{padding:18px}
+.m .hi{padding:22px}
+.m .score{padding:20px}
+.m .sec{margin-top:28px}
+.m .foot-note{margin-top:36px}
+
+/* no hover lifts on touch; press feedback instead */
+.m .btn:hover,.m .s-card:hover,.m .pk-card:hover,.m .q-card:hover,.m .t-row:hover,.m .story:hover .ringb{transform:none}
+.m .btn:active,.m .chip:active,.m .act button:active{transform:scale(.96)}
+.m .s-card:active,.m .pk-card:active,.m .q-card:active,.m .t-row:active,.m .al:active{transform:scale(.985)}
+
+/* modals and search become bottom sheets */
+.m .modal,.m .pal{top:auto;bottom:0;left:0;width:100%;max-height:88%;border-radius:28px 28px 0 0;border-bottom:0;transform:translateY(100%);padding-bottom:env(safe-area-inset-bottom,0px)}
+.m .modal.on,.m .pal.on{transform:none}
+.m .modal::before{content:"";display:block;width:40px;height:5px;border-radius:3px;background:var(--line-2);margin:10px auto 0}
+.m .pal-list{max-height:60vh}
+
+/* chat drawer and stories go full screen */
+.m .drawer{width:100%;border-left:0;padding-top:env(safe-area-inset-top,0px)}
+.m .sv-card{width:100%;height:100%;border-radius:0;border:0;padding-top:calc(14px + env(safe-area-inset-top,0px));padding-bottom:calc(18px + env(safe-area-inset-bottom,0px))}
+.m .chat-page{height:calc(100dvh - 170px)}
+.m .toast{bottom:calc(96px + env(safe-area-inset-bottom,0px));max-width:calc(100% - 32px);white-space:nowrap}
+
+/* "More" sheet */
+.m-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.m-grid a,.m-grid button{display:flex;flex-direction:column;align-items:center;gap:8px;padding:16px 8px;border-radius:18px;background:var(--surface-2);border:1px solid var(--line);font-size:12.5px;font-weight:700;text-align:center;line-height:1.25}
+.m-grid .ic{width:22px;height:22px;color:var(--blue-ink)}
+.m-grid a:active,.m-grid button:active{transform:scale(.95)}

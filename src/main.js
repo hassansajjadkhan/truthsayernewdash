@@ -643,6 +643,10 @@ function upgrade(){modal(`${mHead('You’ve used this month’s AI interactions'
   <p class="muted" style="font-size:11.5px;margin:0">Example screen. Top-up prices are placeholders.</p><div class="row" style="justify-content:flex-end"><button class="btn btn--ghost" data-close>Not now</button><button class="btn btn--grad" data-close>Top up</button></div></div>`)}
 function addPick(){modal(`${mHead('Add a pick')}<div class="mb stack"><label class="search" for="apIn">${ic('search')}<input id="apIn" placeholder="Ticker, e.g. ORCL"></label><div class="chips">${['ORCL','ACN','CPB','USAR','XAIR','KMX'].filter(t=>!PICKS.includes(t)).map(t=>`<button class="chip" data-pickadd="${t}">${ic('plus',14)}${t}</button>`).join('')}</div><p class="muted" style="font-size:12.5px;margin:0">Suggestions are tickers TruthSayer strategies have traded recently.</p></div>`)}
 function newAlert(sym){const i=tkInfo(sym)||{price:100};if(i.price==null)i.price=100;modal(`${mHead('Price alert for '+sym)}<div class="mb stack"><p class="muted" style="margin:0" class="num">Now ${money(i.price)}</p><form class="stack" id="naForm" data-sym="${sym}"><div class="row" style="gap:12px"><div class="field" style="flex:1">When price is<select id="na-c"><option>Above</option><option>Below</option></select></div><div class="field" style="flex:1">Price<input id="na-p" type="number" step="0.01" value="${(i.price*1.05).toFixed(2)}"></div></div><button class="btn btn--grad">Create alert</button></form></div>`)}
+/* mobile app "More" sheet (only reachable from /mobileview) */
+function moreSheet(){const items=[['#news','news','News'],['#picks','star','My picks'],['#research','mic','Hedge Fund Insights'],['#chat','spark','AI Chat'],['#rewards','trophy','Rewards'],['#social','social','Social'],['#account','user','Account']];
+  modal(`${mHead('More')}<div class="mb"><div class="m-grid">${items.map(([h,i,l])=>`<a href="${h}" data-close>${ic(i,22)}<span>${l}</span></a>`).join('')}<button data-more-theme>${ic('moon',22)}<span>Light / dark</span></button></div>
+  <a class="btn btn--ghost" href="/" target="_top" style="width:100%;margin-top:14px">${ic('display',16)}Open desktop view</a></div>`)}
 function shareCard(sym){const t=TRM[sym];modal(`${mHead('Share this trade')}<div class="mb stack" style="align-items:center"><div class="share-card"><div class="row" style="justify-content:space-between"><span data-logo="26">${LOGO(26)}</span><span style="font-size:12px;font-weight:700;opacity:.7">${S[t.s].name} ©</span></div><div><div style="font-size:30px;font-weight:800;letter-spacing:-.04em">${t.tk}</div><div class="big num" style="color:${t.roi>=0?'#3CFDB5':'#FF6B6B'}">${pct(t.roi,1)}</div><small>${t.st==='open'?'Open since '+t.ed:'in '+t.days+' day'+(t.days>1?'s':'')+' · closed '+t.xd}</small></div><small>truthsayer.com · Every alert traded with real money. Not investment advice.</small></div><div class="row"><button class="btn btn--ghost" data-copylink>Copy link</button><button class="btn btn--grad" data-close>Done</button></div></div>`)}
 
 /* ================= theme ================= */
@@ -664,6 +668,9 @@ function route(){
   if(key==='strategies')renderTrades();if(key==='alerts')renderFeed();if(key==='news')renderNews();if(key==='chat')renderChats();
   const navKey={trade:'strategies',ticker:'picks'}[key]||key;
   $$('[data-nav]').forEach(a=>{if(a.dataset.nav===navKey)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});
+  // mobile app shell: page title in the header, "More" tab lit for pages without their own tab
+  $$('[data-mtitle]').forEach(t=>t.textContent=key==='home'?'TruthSayer AI':(key==='ticker'||key==='trade')&&arg?arg:el.getAttribute('aria-label'));
+  $$('[data-more]').forEach(b=>{if($$(`.tabbar [data-nav="${navKey}"]`).length)b.removeAttribute('aria-current');else b.setAttribute('aria-current','page')});
   $('.launch').hidden=key==='chat'||key==='welcome';
   if(lastView!==h){window.scrollTo(0,0);closeAll()}lastView=h;syncGlobal();
 }
@@ -706,6 +713,8 @@ document.addEventListener('click',e=>{
   else if(d.rtk){rTk=d.rtk;route()}
   else if('newchat' in d){CHAT.length=0;renderChats();$('#pIn').focus()}
   else if('upgrade' in d)upgrade()
+  else if('more' in d)moreSheet()
+  else if('moreTheme' in d){closeAll();cycleTheme()}
   else if(d.acct){acct=d.acct;location.hash='account-'+d.acct}
   else if(d.bill){bill=d.bill;route()}
   else if(d.themeSet){themeMode=d.themeSet;applyTheme();route()}
