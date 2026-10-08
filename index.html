@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>TruthSayer App Mockup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/src/styles.css">
+</head>
+<body>
+<div class="app">
+  <nav class="nav" aria-label="Main">
+    <div class="brand"><span data-logo="28"></span><div>TRUTHSAYER <small>AI</small></div></div>
+    <a href="#home" data-nav="home"><i data-i="home"></i>Home</a>
+    <a href="#strategies" data-nav="strategies"><i data-i="perf"></i>Strategies</a>
+    <a href="#alerts" data-nav="alerts"><i data-i="bell"></i>Alerts<span class="badge" data-unread>3</span></a>
+    <a href="#news" data-nav="news"><i data-i="news"></i>News</a>
+    <a href="#picks" data-nav="picks"><i data-i="star"></i>My picks</a>
+    <a href="#research" data-nav="research"><i data-i="mic"></i>Hedge Fund Insights</a>
+    <a href="#chat" data-nav="chat"><i data-i="spark"></i>AI Chat</a>
+    <div class="lbl">You</div>
+    <a href="#rewards" data-nav="rewards"><i data-i="trophy"></i>Rewards</a>
+    <a href="#social" data-nav="social"><i data-i="social"></i>Social<span class="soon">SOON</span></a>
+    <a href="#account" data-nav="account"><i data-i="user"></i>Account</a>
+    <div class="nav-foot">
+      <a class="lvl-card" href="#rewards" style="padding:14px">
+        <div class="t">Level 3 · Analyst <span class="num" data-xp-txt>640 / 1,000 XP</span></div>
+        <div class="bar"><i data-xp-bar style="width:64%"></i></div>
+      </a>
+      <a class="me" href="#account"><span class="avatar">H</span><div><b>hassan</b><span>Professional · Yearly</span></div></a>
+    </div>
+  </nav>
+
+  <main class="main">
+    <header class="topbar">
+      <button class="searchbtn" data-open-pal><i data-i="search"></i><span class="st">Search tickers, pages, alerts</span><kbd>⌘K</kbd></button>
+      <div class="tb-r">
+        <a class="streak" href="#rewards" title="Days in a row you answered an alert"><span class="fl"><i data-i="flame"></i></span><span class="num" data-streak>6</span><span class="lbl">day streak</span></a>
+        <button class="icon-btn" id="themeBtn" aria-label="Switch light or dark"><i data-i="moon"></i></button>
+        <a class="icon-btn" href="#alerts" aria-label="Unread alerts"><i data-i="bell"></i><span class="dot" data-unread>3</span></a>
+        <a class="icon-btn tb-me" href="#account" aria-label="Account"><span class="avatar" style="width:30px;height:30px;font-size:12px">H</span></a>
+      </div>
+    </header>
+
+    <section class="view" id="v-home" aria-label="Home"></section>
+    <section class="view" id="v-strategies" aria-label="Strategies"></section>
+    <section class="view" id="v-trade" aria-label="Trade"></section>
+    <section class="view" id="v-alerts" aria-label="Alerts"></section>
+    <section class="view" id="v-news" aria-label="News"></section>
+    <section class="view" id="v-picks" aria-label="My picks"></section>
+    <section class="view" id="v-ticker" aria-label="Ticker"></section>
+    <section class="view" id="v-research" aria-label="Hedge Fund Insights"></section>
+    <section class="view" id="v-chat" aria-label="AI Chat"></section>
+    <section class="view" id="v-rewards" aria-label="Rewards"></section>
+    <section class="view" id="v-social" aria-label="Social"></section>
+    <section class="view" id="v-account" aria-label="Account"></section>
+    <section class="view" id="v-welcome" aria-label="Welcome"></section>
+    <section class="view" id="v-404" aria-label="Not found"></section>
+
+    <p class="foot-note">Mockup. Strategy values, trades, alerts, tickers and fundamentals are taken from app.truthsayer.com on 7 Oct 2026. Chart curves, news headlines and your rewards progress are illustrative samples. TruthSayer AI claims compliance with GIPS®, a registered trademark of CFA Institute. Not investment advice.</p>
+  </main>
+</div>
+
+<button class="launch" data-open-drawer><span class="t" data-logo="22"></span>Ask TruthSayer AI</button>
+
+<aside class="drawer" id="drawer" aria-label="AI Chat">
+  <div class="thread-h"><div class="row" style="gap:12px"><span class="avatar" style="background:var(--grad);border-radius:12px" data-logo="18"></span><div><b style="display:block">TruthSayer AI Chat</b><span class="muted num" style="font-size:12px" data-left-txt>1,000 interactions left</span></div></div>
+    <div class="row"><a class="btn btn--ghost btn--xs" href="#chat" data-close-drawer>Full screen</a><button class="icon-btn" data-close-drawer aria-label="Close chat" style="width:36px;height:36px"><i data-i="close"></i></button></div></div>
+  <div class="msgs" id="dMsgs"></div>
+  <div class="sugg" id="dSugg"></div>
+  <div class="composer"><form data-chat-form="d"><input id="dIn" placeholder="Ask about a ticker, trade or headline" autocomplete="off"><button class="send" aria-label="Send"><i data-i="send"></i></button></form><div class="disc">AI answers can be wrong. Not investment advice.</div></div>
+</aside>
+
+<div class="scrim" id="scrim"></div>
+
+<div class="modal pal" id="pal" role="dialog" aria-label="Search">
+  <label class="search" for="palIn"><i data-i="search"></i><input id="palIn" placeholder="Type a ticker, page or command" autocomplete="off"></label>
+  <div class="pal-list" id="palList"></div>
+</div>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true"></div>
+
+<div class="sv" id="sv" aria-label="New alerts"></div>
+
+<div class="toast" id="toast" role="status"></div>
+
+<nav class="tabbar" aria-label="Main">
+  <a href="#home" data-nav="home"><i data-i="home"></i>Home</a>
+  <a href="#strategies" data-nav="strategies"><i data-i="perf"></i>Strategies</a>
+  <button class="t-btn" data-open-drawer aria-label="Ask TruthSayer AI"><span data-logo="26"></span></button>
+  <a href="#alerts" data-nav="alerts"><i data-i="bell"></i>Alerts<span class="bd" data-unread>3</span></a>
+  <a href="#rewards" data-nav="rewards"><i data-i="trophy"></i>Rewards</a>
+</nav>
+<script type="module" src="/src/main.js"></script>
+</body>
+</html>
